@@ -16,18 +16,18 @@ public class CarChassis : MonoBehaviour
     /*[SerializeField]*/
     public float engineTorque, brakeTorque, handBrakeTorque, steerAngle;
 
-    public float LinearVelocity => rb.velocity.magnitude * 3.6f;
+    public float LinearVelocity => rbody.velocity.magnitude * 3.6f;
 
-    private new Rigidbody rb;
+    private Rigidbody rbody;
 
     public bool IsHanded, burnout;
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rbody = GetComponent<Rigidbody>();
 
         if (centerofMass != null)
         {
-            rb.centerOfMass = centerofMass.transform.localPosition;
+            rbody.centerOfMass = centerofMass.transform.localPosition;
         }
 
         for (int i = 0; i < wheelAxles.Length; i++)
@@ -60,12 +60,12 @@ public class CarChassis : MonoBehaviour
     private void UpdateDownForce()
     {
         float downForce = Mathf.Clamp(downForceFactor * LinearVelocity, downForceMin, downForceMax);
-        rb.AddForce(-transform.up * downForce);
+        rbody.AddForce(-transform.up * downForce);
     }
 
     private void UpdateAngularDrag()
     {
-        rb.angularDrag = Mathf.Clamp(angularDragFactor * LinearVelocity, angularDragMin, angularDragMax);
+        rbody.angularDrag = Mathf.Clamp(angularDragFactor * LinearVelocity, angularDragMin, angularDragMax);
     }
 
     private void UpdateWheelAxles()
