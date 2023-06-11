@@ -11,6 +11,11 @@ public class CarInputControl : MonoBehaviour
 
     private float wheelSpeed, verticalAxis, horizontalAxis, handBrakeAxis;
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
     private void Update()
     {
         //удалить
@@ -28,7 +33,7 @@ public class CarInputControl : MonoBehaviour
         UpdateSteer();
         UpdateAutoBrake();
     }
-
+    #region Private API
     private void UpdateThrottleAndBrake()
     {
         car.HandBrakeControl = handBrakeAxis;
@@ -77,3 +82,4 @@ public class CarInputControl : MonoBehaviour
         if (!car.burnout) return;
     }
 }
+#endregion

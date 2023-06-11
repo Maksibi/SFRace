@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -5,6 +6,9 @@ using UnityEngine.Events;
 public class Car : MonoBehaviour
 {
     public event UnityAction<string> GearChanged;
+
+    public delegate void GearShifted();
+    public event GearShifted GearUpShifted;
 
     private CarChassis chassis;
 
@@ -16,6 +20,7 @@ public class Car : MonoBehaviour
     public float MaxSpeed => maxSpeed;
     public float ThrottleControl, SteerControl, BrakeControl, HandBrakeControl;
     public float LinearVelocity => chassis.LinearVelocity;
+    public float NormalizedLinearVelocity => chassis.LinearVelocity / maxSpeed ;
     public float WheelSpeed => chassis.GetWheelSpeed();
 
     public bool burnout;
@@ -30,6 +35,7 @@ public class Car : MonoBehaviour
     [SerializeField] private float upShiftEngineRPM;
     [SerializeField] private float downShiftEngineRPM;
     [SerializeField] private float reverseGear;
+    [SerializeField] private float DragonLowEngineRPM;
     [Header("Debug")]
 
     [SerializeField] private float selectedGear;
@@ -44,6 +50,7 @@ public class Car : MonoBehaviour
         UpdateEngineTorque();
         AutoShiftGear();
 
+        if (engineRPM <= DragonLowEngineRPM) GearUpShifted?.Invoke();
         if (LinearVelocity >= maxSpeed) engineTorque = 0;
 
         chassis.engineTorque = engineTorque * ThrottleControl;

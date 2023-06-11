@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class CarChassis : MonoBehaviour
 {
+    #region Prefs
     [SerializeField] private WheelAxle[] wheelAxles;
     [SerializeField] private float wheelBaseLength;
 
@@ -12,6 +13,7 @@ public class CarChassis : MonoBehaviour
     [SerializeField] private float angularDragMin, angularDragMax, angularDragFactor;
 
     [SerializeField] private Transform centerofMass;
+    #endregion
     //DEBUG
     /*[SerializeField]*/
     public float engineTorque, brakeTorque, handBrakeTorque, steerAngle;

@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class EngineSound : MonoBehaviour
 {
+    #region Prefs
     [SerializeField] private Car car;
 
     [SerializeField] private float pitchModifier;
@@ -15,7 +16,7 @@ public class EngineSound : MonoBehaviour
 
     [SerializeField] private AudioSource engineAudio1;
     [SerializeField] private AudioSource engineAudio2;
-
+    #endregion
     private void Update()
     {
             engineAudio1.pitch = basePitch + pitchModifier * (car.EngineRPM / car.EngineMaxRPM * rpmModifier);

@@ -4,6 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class WheelAxle
 {
+    #region Prefs
     [SerializeField] private WheelCollider leftWheelCol, rightWheelCol;
 
     [SerializeField] private Transform leftWheel, rightWheel;
@@ -25,11 +26,11 @@ public class WheelAxle
 
     [SerializeField] private float baseSIdewaysStiffness = 2.0f;
     [SerializeField] private float stabilitySidewaysFactor = 1.0f;
-
+    #endregion
     private WheelHit leftWheelHit, rightWheelHit;
 
     private float velocity = 0;
-    // public API
+    #region Public API
     public void Update()
     {
         UpdateWheelHits();
@@ -138,7 +139,8 @@ public class WheelAxle
             }
         }
     }
-    // private
+    #endregion
+    #region Private API
     private void UpdateWheelHits()
     {
         leftWheelCol.GetGroundHit(out leftWheelHit);
@@ -238,3 +240,4 @@ public class WheelAxle
         wheelTransform.rotation = rotation;
     }
 }
+#endregion
