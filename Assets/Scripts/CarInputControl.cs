@@ -33,6 +33,17 @@ public class CarInputControl : MonoBehaviour
         UpdateSteer();
         UpdateAutoBrake();
     }
+    public void Stop()
+    {
+        verticalAxis = 0;
+        horizontalAxis = 0;
+        handBrakeAxis = 0;
+
+        car.ThrottleControl = 0;
+        car.SteerControl = 0;
+        car.BrakeControl = 1;
+        car.HandBrakeControl = 0;
+    }
     #region Private API
     private void UpdateThrottleAndBrake()
     {

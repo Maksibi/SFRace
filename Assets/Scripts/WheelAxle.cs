@@ -167,8 +167,6 @@ public class WheelAxle
 
             leftWheelCol.sidewaysFriction = leftSideways;
             rightWheelCol.sidewaysFriction = rightSideways;
-
-            Debug.Log("False");
         }
         else
         {
@@ -185,6 +183,11 @@ public class WheelAxle
 
                 leftWheelCol.sidewaysFriction = leftForward;
                 rightWheelCol.sidewaysFriction = rightForward;
+            }
+            else
+            {
+                leftWheelCol.brakeTorque = 3000;
+                rightWheelCol.brakeTorque = 3000;
             }
         }
     }

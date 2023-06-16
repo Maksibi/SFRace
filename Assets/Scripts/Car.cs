@@ -48,9 +48,8 @@ public class Car : MonoBehaviour
     private void FixedUpdate()
     {
         UpdateEngineTorque();
-        AutoShiftGear();
+        //AutoShiftGear();
 
-        if (engineRPM <= DragonLowEngineRPM) GearUpShifted?.Invoke();
         if (LinearVelocity >= maxSpeed) engineTorque = 0;
 
         chassis.engineTorque = engineTorque * ThrottleControl;
@@ -85,10 +84,12 @@ public class Car : MonoBehaviour
     public void UpGear()
     {
         ShiftGear(selectedGearIndex + 1);
+        GearUpShifted?.Invoke();
     }
     public void DownGear()
     {
         ShiftGear(selectedGearIndex - 1);
+        GearUpShifted?.Invoke();
     }
     public void ShiftToReverseGear()
     {
