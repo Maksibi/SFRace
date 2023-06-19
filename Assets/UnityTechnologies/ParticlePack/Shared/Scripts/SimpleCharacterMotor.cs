@@ -1,33 +1,34 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class SimpleCharacterMotor : MonoBehaviour
 {
     public CursorLockMode cursorLockMode = CursorLockMode.Locked;
     public bool cursorVisible = false;
+
     [Header("Movement")]
     public float walkSpeed = 2;
+
     public float runSpeed = 4;
     public float gravity = 9.8f;
+
     [Space]
     [Header("Look")]
     public Transform cameraPivot;
+
     public float lookSpeed = 45;
     public bool invertY = true;
+
     [Space]
     [Header("Smoothing")]
     public float movementAcceleration = 1;
 
-    CharacterController controller;
-    Vector3 movement, finalMovement;
-    float speed;
-    Quaternion targetRotation, targetPivotRotation;
+    private CharacterController controller;
+    private Vector3 movement, finalMovement;
+    private float speed;
+    private Quaternion targetRotation, targetPivotRotation;
 
-
-    void Awake()
+    private void Awake()
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = cursorLockMode;
@@ -35,13 +36,13 @@ public class SimpleCharacterMotor : MonoBehaviour
         targetRotation = targetPivotRotation = Quaternion.identity;
     }
 
-    void Update()
+    private void Update()
     {
         UpdateTranslation();
         UpdateLookRotation();
     }
 
-    void UpdateLookRotation()
+    private void UpdateLookRotation()
     {
         var x = Input.GetAxis("Mouse Y");
         var y = Input.GetAxis("Mouse X");
@@ -54,7 +55,7 @@ public class SimpleCharacterMotor : MonoBehaviour
         cameraPivot.localRotation = targetPivotRotation;
     }
 
-    void UpdateTranslation()
+    private void UpdateTranslation()
     {
         if (controller.isGrounded)
         {

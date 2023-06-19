@@ -1,15 +1,19 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 public class CarInputControl : MonoBehaviour
 {
-    [SerializeField] private Car car;
     [SerializeField] private AnimationCurve brakeCurve, steerCurve;
 
     [SerializeField][Range(0.0f, 1.0f)] private float autoBrakeFactor = 0.2f;
 
     private float wheelSpeed, verticalAxis, horizontalAxis, handBrakeAxis;
+
+    private Car car;
+    [Inject]
+    public void Construct(Car car) => this.car = car;
 
     private void Start()
     {
@@ -20,7 +24,6 @@ public class CarInputControl : MonoBehaviour
     {
         //удалить
         if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
-        if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         if (Input.GetKeyDown(KeyCode.E)) car.UpGear();
         if (Input.GetKeyDown(KeyCode.Q)) car.DownGear();
@@ -35,13 +38,20 @@ public class CarInputControl : MonoBehaviour
     }
     public void Stop()
     {
+        Reset();
+
+        car.BrakeControl = 1;
+    }
+
+    public void Reset()
+    {
         verticalAxis = 0;
         horizontalAxis = 0;
         handBrakeAxis = 0;
 
         car.ThrottleControl = 0;
         car.SteerControl = 0;
-        car.BrakeControl = 1;
+        car.BrakeControl = 0;
         car.HandBrakeControl = 0;
     }
     #region Private API
@@ -92,5 +102,6 @@ public class CarInputControl : MonoBehaviour
 
         if (!car.burnout) return;
     }
+
 }
 #endregion

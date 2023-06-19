@@ -1,10 +1,17 @@
 using UnityEngine;
+using Zenject;
 
-public class RaceInputController : MonoBehaviour
+public class RaceInputController : MonoBehaviour//, IDependency<CarInputControl>, IDependency<RaceStateTracker>
 {
-    [SerializeField] private CarInputControl control;
-    [SerializeField] private RaceStateTracker raceStateTracker;
+    private RaceStateTracker raceStateTracker;
+    private CarInputControl control;
 
+    [Inject]
+    public void Construct (CarInputControl control, RaceStateTracker raceStateTracker)
+    {
+        this.control = control;
+        this.raceStateTracker = raceStateTracker;
+    }
     private void OnEnable()
     {
         raceStateTracker.Started += OnRaceStarted;

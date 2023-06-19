@@ -1,11 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 public class ProximityActivate : MonoBehaviour
 {
-
     public Transform distanceActivator, lookAtActivator;
     public float distance;
     public Transform activator;
@@ -15,11 +11,11 @@ public class ProximityActivate : MonoBehaviour
     public bool enableInfoPanel = false;
     public GameObject infoIcon;
 
-    float alpha;
+    private float alpha;
     public CanvasGroup infoPanel;
-    Quaternion originRotation, targetRotation;
+    private Quaternion originRotation, targetRotation;
 
-    void Start()
+    private void Start()
     {
         originRotation = transform.rotation;
         alpha = activeState ? 1 : -1;
@@ -27,7 +23,7 @@ public class ProximityActivate : MonoBehaviour
         infoIcon.SetActive(infoPanel != null);
     }
 
-    bool IsTargetNear()
+    private bool IsTargetNear()
     {
         var distanceDelta = distanceActivator.position - activator.position;
         if (distanceDelta.sqrMagnitude < distance * distance)
@@ -45,7 +41,7 @@ public class ProximityActivate : MonoBehaviour
         return false;
     }
 
-    void Update()
+    private void Update()
     {
         if (!activeState)
         {
@@ -80,5 +76,4 @@ public class ProximityActivate : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
         }
     }
-
 }

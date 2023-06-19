@@ -5,6 +5,7 @@ using UnityEngine;
 public class CarChassis : MonoBehaviour
 {
     #region Prefs
+
     [SerializeField] private WheelAxle[] wheelAxles;
     [SerializeField] private float wheelBaseLength;
 
@@ -13,23 +14,28 @@ public class CarChassis : MonoBehaviour
     [SerializeField] private float angularDragMin, angularDragMax, angularDragFactor;
 
     [SerializeField] private Transform centerofMass;
-    #endregion
+
+    private const float mpsToKph = 3.6f;
+    #endregion Prefs
+
     //DEBUG
     /*[SerializeField]*/
     public float engineTorque, brakeTorque, handBrakeTorque, steerAngle;
 
-    public float LinearVelocity => rbody.velocity.magnitude * 3.6f;
+    public float LinearVelocity => _rigidbody.velocity.magnitude * mpsToKph;
 
-    private Rigidbody rbody;
+    private Rigidbody _rigidbody;
+    
 
     public bool IsHanded, burnout;
+
     private void Start()
     {
-        rbody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
 
         if (centerofMass != null)
         {
-            rbody.centerOfMass = centerofMass.transform.localPosition;
+            _rigidbody.centerOfMass = centerofMass.transform.localPosition;
         }
 
         for (int i = 0; i < wheelAxles.Length; i++)
@@ -37,6 +43,7 @@ public class CarChassis : MonoBehaviour
             wheelAxles[i].ConfigureVehicleSubsteps(50, 50, 50);
         }
     }
+
     private void FixedUpdate()
     {
         UpdateAngularDrag();
@@ -45,6 +52,7 @@ public class CarChassis : MonoBehaviour
 
         UpdateWheelAxles();
     }
+
     public float GetAverageRPM()
     {
         float sum = 0;
@@ -55,19 +63,21 @@ public class CarChassis : MonoBehaviour
         }
         return sum / wheelAxles.Length;
     }
+
     public float GetWheelSpeed()
     {
         return GetAverageRPM() * wheelAxles[0].GetRadius() * 2 * 0.1885f;
     }
+
     private void UpdateDownForce()
     {
         float downForce = Mathf.Clamp(downForceFactor * LinearVelocity, downForceMin, downForceMax);
-        rbody.AddForce(-transform.up * downForce);
+        _rigidbody.AddForce(-transform.up * downForce);
     }
 
     private void UpdateAngularDrag()
     {
-        rbody.angularDrag = Mathf.Clamp(angularDragFactor * LinearVelocity, angularDragMin, angularDragMax);
+        _rigidbody.angularDrag = Mathf.Clamp(angularDragFactor * LinearVelocity, angularDragMin, angularDragMax);
     }
 
     private void UpdateWheelAxles()
@@ -94,5 +104,11 @@ public class CarChassis : MonoBehaviour
             wheelAxles[i].ApplyHandBrake(handBrakeTorque);
             wheelAxles[i].ApplyBrake(brakeTorque);
         }
+    }
+
+    public void Reset()
+    {
+        _rigidbody.velocity = Vector3.zero;
+        _rigidbody.angularVelocity = Vector3.zero;
     }
 }

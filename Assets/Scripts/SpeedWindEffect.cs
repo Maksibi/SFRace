@@ -7,6 +7,7 @@ public class SpeedWindEffect : MonoBehaviour
     [SerializeField] private new AudioSource audio;
 
     [SerializeField] private float minSpeedLimit, baseVolume, speedVolumeMultiplier;
+
     private void Update()
     {
         if (car.LinearVelocity >= minSpeedLimit)

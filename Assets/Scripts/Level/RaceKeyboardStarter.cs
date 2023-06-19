@@ -1,8 +1,12 @@
 using UnityEngine;
+using Zenject;
 
 public class RaceKeyboardStarter : MonoBehaviour
 {
-    [SerializeField] private RaceStateTracker tracker;
+    private RaceStateTracker tracker;
+
+    [Inject]
+    public void Construct(RaceStateTracker tracker) => this.tracker = tracker;
 
     private void Update()
     {

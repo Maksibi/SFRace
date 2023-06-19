@@ -6,16 +6,21 @@ public enum TrackType
     Circular,
     Sprint
 }
+
 public class TrackpointCircuit : MonoBehaviour
 {
     //events
     public event UnityAction<TrackPoint> TrackpointTriggered;
+
     public event UnityAction<int> LapCompleted;
+
     //prefs
     [SerializeField] private TrackType trackType;
+
     public TrackType TrackType => trackType;
 
-    [SerializeField] private TrackPoint[] points;
+    private TrackPoint[] points;
+    public TrackPoint[] Points => points;
 
     private int lapsCompleted = -1;
 
@@ -23,6 +28,7 @@ public class TrackpointCircuit : MonoBehaviour
     {
         BuildCircuit();
     }
+
     private void OnEnable()
     {
         for (int i = 0; i < points.Length; i++)
@@ -30,6 +36,7 @@ public class TrackpointCircuit : MonoBehaviour
             points[i].Triggered += OnTrackPointTriggered;
         }
     }
+
     private void OnDisable()
     {
         for (int i = 0; i < points.Length; i++)
@@ -37,11 +44,14 @@ public class TrackpointCircuit : MonoBehaviour
             points[i].Triggered -= OnTrackPointTriggered;
         }
     }
+
     private void Start()
     {
         points[0].AssignAsTarget();
     }
+
     #region Private API
+
     [ContextMenu(nameof(BuildCircuit))]
     private void BuildCircuit()
     {
@@ -62,7 +72,7 @@ public class TrackpointCircuit : MonoBehaviour
         {
             points[i].next = points[i + 1];
         }
-        if( trackType == TrackType.Circular)
+        if (trackType == TrackType.Circular)
         {
             points[points.Length - 1].next = points[0];
         }
@@ -71,12 +81,15 @@ public class TrackpointCircuit : MonoBehaviour
         if (trackType == TrackType.Sprint) points[points.Length - 1].isLast = true;
         if (trackType == TrackType.Circular) points[0].isLast = true;
     }
+
     private void OnTrackPointTriggered(TrackPoint point)
     {
         if (!point.IsTarget) return;
 
         point.Passed();
         point.next?.AssignAsTarget();
+
+        TrackpointTriggered?.Invoke(point);
 
         if (point.isLast)
         {
@@ -92,5 +105,6 @@ public class TrackpointCircuit : MonoBehaviour
             }
         }
     }
-    #endregion
+
+    #endregion Private API
 }

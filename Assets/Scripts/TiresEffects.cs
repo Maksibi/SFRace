@@ -3,6 +3,7 @@ using UnityEngine;
 public class TiresEffects : MonoBehaviour
 {
     #region Prefs
+
     [SerializeField] private WheelCollider[] wheelColliders;
     [SerializeField] private ParticleSystem[] wheelSmokes;
 
@@ -10,10 +11,12 @@ public class TiresEffects : MonoBehaviour
 
     [SerializeField] private GameObject skidPrefab;
 
-    [SerializeField] float forwardSlipLimit, sidewaysSlipLimit;
+    [SerializeField] private float forwardSlipLimit, sidewaysSlipLimit;
 
     [SerializeField] private float SkidYOffset;
-    #endregion
+
+    #endregion Prefs
+
     private WheelHit wheelHit;
 
     private Transform[] skidTrail;
@@ -22,6 +25,7 @@ public class TiresEffects : MonoBehaviour
     {
         skidTrail = new Transform[wheelColliders.Length];
     }
+
     private void Update()
     {
         bool isSlip = false;
@@ -50,7 +54,7 @@ public class TiresEffects : MonoBehaviour
                         skidTrail[i].forward = -wheelHit.normal;
 
                         wheelSmokes[i].transform.position = skidTrail[i].position;
-                        wheelSmokes[i].Emit(10);
+                        wheelSmokes[i].Emit(3);
                     }
                     isSlip = true;
 

@@ -1,25 +1,31 @@
 using Cinemachine;
 using UnityEngine;
+using Zenject;
 
 public class CameraController : MonoBehaviour
 {
     #region Prefs
+
     [SerializeField] private new CinemachineFreeLook camera;
     [SerializeField] private CinemachineCameraOffset offset;
-
-    [SerializeField] private Car car;
 
     [SerializeField] private float baseFOV, minFOV, maxFOV;
     [SerializeField] private float baseOffsetZ, minOffsetZ, maxOffsetZ;
 
     [SerializeField][Range(0f, 1f)] private float normalizedSpeedShake;
     [SerializeField] private float shakeAmount;
+
     #endregion
+    private Car car;
+    [Inject]
+    public void Construct(Car car) => this.car = car;
+
     private void Start()
     {
         camera.m_Lens.FieldOfView = baseFOV;
         offset.m_Offset.z = baseOffsetZ;
     }
+
     private void Update()
     {
         camera.m_Lens.FieldOfView = Mathf.Lerp(minFOV, maxFOV, car.NormalizedLinearVelocity);

@@ -1,12 +1,15 @@
 using UnityEngine;
 using TMPro;
+using Zenject;
 
 public class UICountdownTimer : MonoBehaviour
 {
-    [SerializeField] private RaceStateTracker raceStateTracker;
-
     [SerializeField] private TextMeshProUGUI text;
-    [SerializeField] private Timer timer;
+
+    private RaceStateTracker raceStateTracker;
+
+    [Inject]
+    public void Construct(RaceStateTracker obj) => raceStateTracker = obj;
 
     private void OnEnable()
     {
@@ -32,7 +35,7 @@ public class UICountdownTimer : MonoBehaviour
     }
     private void Update()
     {
-        text.text = timer.Value.ToString("F0");
+        text.text = raceStateTracker.CountdownTimer.Value.ToString("F0");
 
         if (text.text == "0") text.text = "Go!";
     }

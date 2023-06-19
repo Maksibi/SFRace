@@ -4,14 +4,16 @@ public class ActivatedTrackpoint : TrackPoint
 {
     [SerializeField] private GameObject hint;
 
-    private void Start()
+    private void Awake()
     {
-        hint.SetActive(false);
+        hint.SetActive(IsTarget);
     }
+
     protected override void OnPassed()
     {
         hint.SetActive(false);
     }
+
     protected override void OnAssignAsTarget()
     {
         hint.SetActive(true);

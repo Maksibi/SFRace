@@ -2,11 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-class EngineIndicatorColor
+internal class EngineIndicatorColor
 {
     public float MaxRPM;
     public Color color;
 }
+
 public class CarEngineIndicator : MonoBehaviour
 {
     [SerializeField] private Car car;
@@ -19,7 +20,7 @@ public class CarEngineIndicator : MonoBehaviour
 
         for (int i = 0; i < colors.Length; i++)
         {
-            if(car.EngineRPM <= colors[i].MaxRPM)
+            if (car.EngineRPM <= colors[i].MaxRPM)
             {
                 image.color = colors[i].color;
                 break;

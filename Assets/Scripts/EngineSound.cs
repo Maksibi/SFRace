@@ -4,6 +4,7 @@ using UnityEngine;
 public class EngineSound : MonoBehaviour
 {
     #region Prefs
+
     [SerializeField] private Car car;
 
     [SerializeField] private float pitchModifier;
@@ -16,12 +17,14 @@ public class EngineSound : MonoBehaviour
 
     [SerializeField] private AudioSource engineAudio1;
     [SerializeField] private AudioSource engineAudio2;
-    #endregion
+
+    #endregion Prefs
+
     private void Update()
     {
-            engineAudio1.pitch = basePitch + pitchModifier * (car.EngineRPM / car.EngineMaxRPM * rpmModifier);
-            engineAudio2.pitch = basePitch + pitchModifier * (car.EngineRPM / car.EngineMaxRPM * rpmModifier);
-            engineAudio1.volume = baseVolume1 + volumeModifier * (car.EngineRPM / car.EngineMaxRPM);
-            engineAudio2.volume = baseVolume2 + volumeModifier * (car.EngineRPM / car.EngineMaxRPM);
+        engineAudio1.pitch = basePitch + pitchModifier * (car.EngineRPM / car.EngineMaxRPM * rpmModifier);
+        engineAudio2.pitch = basePitch + pitchModifier * (car.EngineRPM / car.EngineMaxRPM * rpmModifier);
+        engineAudio1.volume = baseVolume1 + volumeModifier * (car.EngineRPM / car.EngineMaxRPM);
+        engineAudio2.volume = baseVolume2 + volumeModifier * (car.EngineRPM / car.EngineMaxRPM);
     }
 }

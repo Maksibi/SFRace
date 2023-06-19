@@ -1,7 +1,6 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public enum RaceState
 {
@@ -20,11 +19,11 @@ public class RaceStateTracker : MonoBehaviour
     public event UnityAction<TrackPoint> TrackpointPassed;
     public event UnityAction<int> LapCompleted;
     #endregion
-    [SerializeField] private TrackpointCircuit trackpointCircuit;
-
     [SerializeField] private int lapsToComplete;
-
     [SerializeField] private Timer countdownTimer;
+
+    private TrackpointCircuit trackpointCircuit;
+    public Timer CountdownTimer => countdownTimer;
 
     private RaceState state;
     public RaceState State => state;
@@ -100,6 +99,12 @@ public class RaceStateTracker : MonoBehaviour
     public void FinishLap(int lapAmount)
     {
         LapCompleted?.Invoke(lapAmount);
+    }
+
+    [Inject]
+    public void Construct(TrackpointCircuit trackpoint)
+    {
+        this.trackpointCircuit = trackpoint;
     }
     #endregion
 }

@@ -10,6 +10,7 @@ public class CarGearboxIndicator : MonoBehaviour
     {
         car.GearChanged += OnGearChanged;
     }
+
     private void OnDisable()
     {
         car.GearChanged -= OnGearChanged;
