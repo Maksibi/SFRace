@@ -4,6 +4,8 @@ using Zenject;
 public class UIPausePanel : MonoBehaviour
 {
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject buttons;
 
     private Pause pause;
 
@@ -18,6 +20,10 @@ public class UIPausePanel : MonoBehaviour
     private void Start()
     {
         pausePanel.SetActive(false);
+        
+        settingsPanel.SetActive(false);
+
+        buttons.SetActive(true);
     }
 
     private void Update()
@@ -40,6 +46,8 @@ public class UIPausePanel : MonoBehaviour
 
     public void UnPause()
     {
+        buttons.SetActive(true);
+        settingsPanel.SetActive(false);
         pause.UnPause();
     }
 }
