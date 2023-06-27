@@ -67,10 +67,10 @@ public class WheelAxle
             leftWheelCol.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelBaseLength / (radius + wheelBaseLength / 2)) * angleSign;
             rightWheelCol.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelBaseLength / (radius - wheelBaseLength / 2)) * angleSign;
         }
-        if (angle < 0)
+        else if (angle < 0)
         {
-            rightWheelCol.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelBaseLength / (radius - wheelBaseLength / 2)) * angleSign;
-            leftWheelCol.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelBaseLength / (radius + wheelBaseLength / 2)) * angleSign;
+            rightWheelCol.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelBaseLength / (radius + wheelBaseLength / 2)) * angleSign;
+            leftWheelCol.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelBaseLength / (radius - wheelBaseLength / 2)) * angleSign;
         }
         else
         {

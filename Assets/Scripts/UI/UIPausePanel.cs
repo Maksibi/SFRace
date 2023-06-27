@@ -19,11 +19,9 @@ public class UIPausePanel : MonoBehaviour
 
     private void Start()
     {
-        pausePanel.SetActive(false);
-        
-        settingsPanel.SetActive(false);
-
         buttons.SetActive(true);
+        settingsPanel.SetActive(false);
+        pausePanel.SetActive(false);
     }
 
     private void Update()
@@ -42,6 +40,12 @@ public class UIPausePanel : MonoBehaviour
     private void OnPauseStateChanged(bool isPause)
     {
         pausePanel.SetActive(isPause);
+
+        if(isPause)
+        {
+            settingsPanel.SetActive(false);
+            buttons.SetActive(true);
+        }
     }
 
     public void UnPause()

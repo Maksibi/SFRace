@@ -24,6 +24,9 @@ public class Pause : MonoBehaviour
     {
         if (isPaused) UnPause();
         else TurnPause();
+
+        Cursor.lockState = isPaused? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = isPaused;
     }
 
     public void TurnPause()

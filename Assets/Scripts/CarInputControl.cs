@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 public class CarInputControl : MonoBehaviour
@@ -15,15 +14,8 @@ public class CarInputControl : MonoBehaviour
     [Inject]
     public void Construct(Car car) => this.car = car;
 
-    private void Start()
-    {
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
-    }
     private void Update()
     {
-        //удалить
-        if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
 
         if (Input.GetKeyDown(KeyCode.E)) car.UpGear();
         if (Input.GetKeyDown(KeyCode.Q)) car.DownGear();
@@ -36,6 +28,7 @@ public class CarInputControl : MonoBehaviour
         UpdateSteer();
         UpdateAutoBrake();
     }
+
     public void Stop()
     {
         Reset();
@@ -54,6 +47,7 @@ public class CarInputControl : MonoBehaviour
         car.BrakeControl = 0;
         car.HandBrakeControl = 0;
     }
+
     #region Private API
     private void UpdateThrottleAndBrake()
     {
@@ -79,10 +73,12 @@ public class CarInputControl : MonoBehaviour
             car.ShiftToFirstGear();
         }
     }
+
     private void UpdateSteer()
     {
         car.SteerControl = steerCurve.Evaluate(car.WheelSpeed / car.MaxSpeed) * horizontalAxis;
     }
+
     private void UpdateAutoBrake()
     {
         if (Input.GetAxis("Vertical") == 0)
@@ -90,18 +86,19 @@ public class CarInputControl : MonoBehaviour
             car.BrakeControl = (brakeCurve.Evaluate(wheelSpeed / car.MaxSpeed)) * autoBrakeFactor;
         }
     }
+
     private void UpdateAxis()
     {
         verticalAxis = Input.GetAxis("Vertical");
         horizontalAxis = Input.GetAxis("Horizontal");
         handBrakeAxis = Input.GetAxis("Jump");
     }
+
     private void Burnout()
     {
         car.burnout = Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.S);
 
         if (!car.burnout) return;
     }
-
 }
 #endregion

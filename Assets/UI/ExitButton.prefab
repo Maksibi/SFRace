@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3044975679377578922}
   - component: {fileID: 6817626727216677446}
-  - component: {fileID: 346285865463285614}
+  - component: {fileID: 5197007002188042479}
   m_Layer: 0
   m_Name: ExitButton
   m_TagString: Untagged
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &346285865463285614
+--- !u!114 &5197007002188042479
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -69,12 +69,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 5957494898120302756}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6843f90c887d6e4cbe4cc113857ef4b, type: 3}
+  m_Script: {fileID: 11500000, guid: f5a01b0500accbf43a67b168b92e9672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5197007002188042479}
+        m_TargetAssemblyTypeName: UIExitButton, Assembly-CSharp
+        m_MethodName: Exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   Interactable: 1
   selectionImage: {fileID: 4273545875015192547}
   OnSelect:
