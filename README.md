@@ -6,4 +6,4 @@
 # SFRace - an educational project in the genre of arcade racing
 Implemented: record time for completing the test track. Saving the record in PlayerPrefs. Car using WheelCollider, burnout, drift, gear shifting. Adjustment of vehicle dynamics and behavior through fields and curves in the editor, simple cutscene with camera flyby through points and the ability to skip (Cinemachine, Timeline). SFX (stock sounds used and edited), VFX (particles, post-processing). Car sounds vary depending on the speed/state of the vehicle. Visual effects also depend on speed (vignette, FOV, motion blur, DOF). Work with script dependencies using Zenject. Main menu, game settings in the main menu.
 
-Planned: multiple full-fledged tracks, multiplayer using Photon, saving using JSON. Transferring car characteristics to ScriptableObject, several different cars with different characteristics and appearances. Improved graphics and sound.# SFRace
+Planned: multiple full-fledged tracks, multiplayer using Photon, saving using JSON. Transferring car characteristics to ScriptableObject, several different cars with different characteristics and appearances. Improved graphics and sound.
