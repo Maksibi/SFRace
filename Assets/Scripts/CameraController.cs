@@ -17,8 +17,11 @@ public class CameraController : MonoBehaviour
 
     #endregion
     private Car car;
-    [Inject]
-    public void Construct(Car car) => this.car = car;
+
+    private void Awake()
+    {
+        car = GetComponentInParent<Car>();
+    }
 
     private void Start()
     {
