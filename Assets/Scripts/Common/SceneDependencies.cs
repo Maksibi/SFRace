@@ -10,7 +10,7 @@ public class SceneDependencies : MonoBehaviour
     [SerializeField] private Car car;
     [SerializeField] private TrackpointCircuit trackpointCircuit;
     [SerializeField] private RaceStateTracker raceStateTracker;
-    [SerializeField] private RaceTImeTracker raceTimeTracker;
+    [SerializeField] private RaceTimeTracker raceTimeTracker;
     [SerializeField] private CarInputControl control;
     [SerializeField] RaceInputController raceController;
     #endregion
@@ -18,7 +18,7 @@ public class SceneDependencies : MonoBehaviour
     {
         if (mono is IDependency<TrackpointCircuit>) (mono as IDependency<TrackpointCircuit>)?.Construct(trackpointCircuit);
         if (mono is IDependency<RaceStateTracker>) (mono as IDependency<RaceStateTracker>)?.Construct(raceStateTracker);
-        if (mono is IDependency<RaceTImeTracker>) (mono as IDependency<RaceTImeTracker>)?.Construct(raceTimeTracker);
+        if (mono is IDependency<RaceTimeTracker>) (mono as IDependency<RaceTimeTracker>)?.Construct(raceTimeTracker);
         if (mono is IDependency<CarInputControl>) (mono as IDependency<CarInputControl>)?.Construct(control);
         if (mono is IDependency<Car>) (mono as IDependency<Car>)?.Construct(car);
         if (mono is IDependency<RaceInputController>) (mono as IDependency<RaceInputController>)?.Construct(raceController);

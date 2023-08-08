@@ -31,7 +31,8 @@ public class CarRespawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)) Respawn();
+        if (Input.GetKeyDown(KeyCode.R)) 
+            Respawn();
     }
 
     private void OnTrackpointPassed(TrackPoint point)
@@ -41,7 +42,8 @@ public class CarRespawner : MonoBehaviour
 
     public void Respawn()
     {
-        if (_stateTracker.State != RaceState.Race | respawnPoint == null) return;
+        if (_stateTracker.State != RaceState.Race | respawnPoint == null)
+            return;
 
         _car.Respawn(respawnPoint.transform.position + respawnPoint.transform.up * respawnHeight,
             respawnPoint.transform.rotation);

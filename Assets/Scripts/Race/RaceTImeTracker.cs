@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class RaceTImeTracker : MonoBehaviour
+public class RaceTimeTracker : MonoBehaviour
 {
     private RaceStateTracker _tracker;
     [Inject]

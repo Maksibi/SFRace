@@ -18,11 +18,11 @@ public class RaceResultTime : MonoBehaviour
     public float PlayerRecordTime => _playerRecordTime;
     public float CurrentTime => _currentTime;
 
-    private RaceTImeTracker timeTracker;
+    private RaceTimeTracker timeTracker;
     private RaceStateTracker stateTracker;
 
     [Inject]
-    public void Construct(RaceTImeTracker timeTracker, RaceStateTracker stateTracker)
+    public void Construct(RaceTimeTracker timeTracker, RaceStateTracker stateTracker)
     {
         this.timeTracker = timeTracker;
         this.stateTracker = stateTracker;
@@ -66,10 +66,10 @@ public class RaceResultTime : MonoBehaviour
     public float GetAbsoluteRecord()
     {
         if (_playerRecordTime < goldTime && _playerRecordTime != 0)
-        {
             return _playerRecordTime;
-        }
-        else return goldTime;
+
+        else
+            return goldTime;
     }
 
     private void Save()

@@ -19,21 +19,25 @@ public class MPUICountdownTimer : MonoBehaviour
 
         text.enabled = false;
     }
+
     private void OnDisable()
     {
         raceStateTracker.PreparationStarted -= OnRacePreparationStarted;
         raceStateTracker.Started -= OnStarted;
     }
+
     private void OnRacePreparationStarted()
     {
         text.enabled = true;
         enabled = true;
     }
+
     private void OnStarted()
     {
         text.enabled = false;
         enabled = false;
     }
+
     private void Update()
     {
         text.text = raceStateTracker.CountdownTimer.Value.ToString("F0");

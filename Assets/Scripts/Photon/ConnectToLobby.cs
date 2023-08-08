@@ -55,6 +55,4 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LoadLevel("Multiplayer");
     }
-
-    
 }

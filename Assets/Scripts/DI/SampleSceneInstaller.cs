@@ -6,7 +6,7 @@ public class SampleSceneInstaller : MonoInstaller
     [SerializeField] private Car car;
     [SerializeField] private TrackpointCircuit trackpointCircuit;
     [SerializeField] private RaceStateTracker raceStateTracker;
-    [SerializeField] private RaceTImeTracker raceTimeTracker;
+    [SerializeField] private RaceTimeTracker raceTimeTracker;
     [SerializeField] private CarInputControl control;
     [SerializeField] private RaceInputController raceController;
     [SerializeField] private RaceResultTime resultTime; 

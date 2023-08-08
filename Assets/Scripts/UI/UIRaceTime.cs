@@ -7,10 +7,10 @@ public class UIRaceTime : MonoBehaviour
     [SerializeField] private TextMeshProUGUI text;
 
     private RaceStateTracker _tracker;
-    private RaceTImeTracker _timeTracker;
+    private RaceTimeTracker _timeTracker;
 
     [Inject]
-    public void Construct(RaceStateTracker tracker, RaceTImeTracker timeTracker)
+    public void Construct(RaceStateTracker tracker, RaceTimeTracker timeTracker)
     {
         _tracker = tracker;
         _timeTracker = timeTracker;

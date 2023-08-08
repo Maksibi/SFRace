@@ -25,8 +25,13 @@ public class RaceStateTracker : MonoBehaviour
     private TrackpointCircuit trackpointCircuit;
     public Timer CountdownTimer => countdownTimer;
 
-    private RaceState state;
+    [SerializeField] private RaceState state;
     public RaceState State => state;
+
+    private void Awake()
+    {
+        trackpointCircuit = FindObjectOfType<TrackpointCircuit>();
+    }
 
     private void OnEnable()
     {
@@ -34,48 +39,57 @@ public class RaceStateTracker : MonoBehaviour
         trackpointCircuit.LapCompleted += OnLapCompleted;
         countdownTimer.Finished += OnCountdownTimerFinished;
     }
+
     private void OnDisable()
     {
         trackpointCircuit.TrackpointTriggered -= OnTrackpointTriggered;
         trackpointCircuit.LapCompleted -= OnLapCompleted;
         countdownTimer.Finished -= OnCountdownTimerFinished;
     }
+
     private void Start()
     {
         StartState(RaceState.Preparation);
 
         countdownTimer.enabled = false;
     }
+
     #region Private API
     private void StartState(RaceState state)
     {
         this.state = state;
     }
+
     private void OnCountdownTimerFinished()
     {
         StartRace();
     }
+
     private void OnTrackpointTriggered(TrackPoint trackpoint)
     {
         TrackpointPassed?.Invoke(trackpoint);
     }
+
     private void OnLapCompleted(int lapAmount)
     {
         if (trackpointCircuit.TrackType == TrackType.Sprint)
-        {
             FinishRace();
-        }
+
         if (trackpointCircuit.TrackType == TrackType.Circular)
         {
-            if (lapAmount == lapsToComplete) FinishRace();
-            else FinishLap(lapAmount);
+            if (lapAmount == lapsToComplete)
+                FinishRace();
+            else
+                FinishLap(lapAmount);
         }
     }
     #endregion
     #region Public API
     public void LaunchCountdownTimer()
     {
-        if (state != RaceState.Preparation) return;
+        if (state != RaceState.Preparation)
+            return;
+
         StartState(RaceState.Countdown);
 
         countdownTimer.enabled = true;
@@ -84,14 +98,18 @@ public class RaceStateTracker : MonoBehaviour
     }
     public void StartRace()
     {
-        if (state != RaceState.Countdown) return;
+        if (state != RaceState.Countdown)
+            return;
+
         StartState(RaceState.Race);
 
         Started?.Invoke();
     }
     public void FinishRace()
     {
-        if (state != RaceState.Race) return;
+        if (state != RaceState.Race)
+            return;
+
         StartState(RaceState.Passed);
 
         Completed?.Invoke();
@@ -99,12 +117,6 @@ public class RaceStateTracker : MonoBehaviour
     public void FinishLap(int lapAmount)
     {
         LapCompleted?.Invoke(lapAmount);
-    }
-
-    [Inject]
-    public void Construct(TrackpointCircuit trackpoint)
-    {
-        this.trackpointCircuit = trackpoint;
     }
     #endregion
 }

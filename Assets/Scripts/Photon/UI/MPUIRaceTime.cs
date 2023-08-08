@@ -6,12 +6,12 @@ public class MPUIRaceTime : MonoBehaviour
     [SerializeField] private TextMeshProUGUI text;
 
     private RaceStateTracker _tracker;
-    private RaceTImeTracker _timeTracker;
+    private RaceTimeTracker _timeTracker;
 
     private void Awake()
     {
         _tracker = FindObjectOfType<RaceStateTracker>();
-        _timeTracker = FindObjectOfType<RaceTImeTracker>();
+        _timeTracker = FindObjectOfType<RaceTimeTracker>();
     }
 
     private void OnEnable()
