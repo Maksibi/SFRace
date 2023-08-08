@@ -6527,7 +6527,7 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_YAxis:
-    Value: 0.8909163
+    Value: 0.5
     m_SpeedMode: 0
     m_MaxSpeed: 3
     m_AccelTime: 0.2
@@ -7890,7 +7890,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4960172656603631663}
   m_LocalRotation: {x: -0.028683484, y: 0.96622074, z: -0.22435457, w: -0.123530254}
-  m_LocalPosition: {x: 0.0000014304919, y: 0, z: 0.0000066757243}
+  m_LocalPosition: {x: 0.0000023841485, y: 0, z: 0.000012874611}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13669,10 +13669,10 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 8630734514525754658}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 674874787403701316}
+  - {fileID: 981426514126142213}
+  - {fileID: 2234588615807571865}
+  - {fileID: 4638924972154942965}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

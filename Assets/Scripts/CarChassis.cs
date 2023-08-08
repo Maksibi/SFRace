@@ -29,10 +29,13 @@ public class CarChassis : MonoBehaviour
 
     public bool IsHanded, burnout;
 
-    private void Start()
+    private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+    }
 
+    private void Start()
+    {
         if (centerofMass != null)
         {
             _rigidbody.centerOfMass = centerofMass.transform.localPosition;

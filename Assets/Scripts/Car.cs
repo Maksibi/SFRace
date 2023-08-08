@@ -48,7 +48,7 @@ public class Car : MonoBehaviour
 
     #endregion Prefs
 
-    private void Start()
+    private void Awake()
     {
         chassis = GetComponent<CarChassis>();
     }

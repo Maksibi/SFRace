@@ -8,6 +8,7 @@ public class PlayerComponentManager : MonoBehaviour
     private PhotonView view;
     private MPCarInput input;
     private CinemachineFreeLook _camera;
+    private AudioListener listener;
 
     private void Awake()
     {
@@ -15,6 +16,7 @@ public class PlayerComponentManager : MonoBehaviour
         car = GetComponent<Car>();
         _camera = GetComponentInChildren<CinemachineFreeLook>();
         input = GetComponent<MPCarInput>();
+        listener = GetComponentInChildren<AudioListener>();
     }
 
     private void Start()
@@ -24,6 +26,7 @@ public class PlayerComponentManager : MonoBehaviour
             car.enabled = false;
             _camera.enabled = false;
             input.enabled = false;
+            Destroy(listener);
         }
     }
 }
