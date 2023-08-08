@@ -9,13 +9,13 @@ public class MPUIRaceRecordTime : MonoBehaviour
     [SerializeField] private TextMeshProUGUI goldRecordTime;
     [SerializeField] private TextMeshProUGUI playerRecordTime;
 
-    private RaceStateTracker _stateTracker;
-    private RaceResultTime _resultTime;
+    private MPRaceStateTracker _stateTracker;
+    private MPRaceResultTime _resultTime;
 
     private void Awake()
     {
-        _stateTracker = FindObjectOfType<RaceStateTracker>();
-        _resultTime = FindObjectOfType<RaceResultTime>();
+        _stateTracker = FindObjectOfType<MPRaceStateTracker>();
+        _resultTime = FindObjectOfType<MPRaceResultTime>();
     }
 
     private void OnEnable()

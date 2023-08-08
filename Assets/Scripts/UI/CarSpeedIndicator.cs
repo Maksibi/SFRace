@@ -3,12 +3,17 @@ using UnityEngine;
 
 public class CarSpeedIndicator : MonoBehaviour
 {
-    [SerializeField] private Car car;
+    private Rigidbody rb;
 
     [SerializeField] private TextMeshProUGUI text;
 
+    private void Awake()
+    {
+        rb = GetComponentInParent<Rigidbody>();
+    }
+
     private void Update()
     {
-        text.text = car.LinearVelocity.ToString("F0");
+        text.text = $"{3.6f * rb.velocity.magnitude:F0}";//("F0");
     }
 }

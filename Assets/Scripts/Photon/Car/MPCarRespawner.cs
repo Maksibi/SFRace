@@ -6,7 +6,7 @@ public class MPCarRespawner : MonoBehaviour
 {
     [SerializeField] private float respawnHeight;
 
-    private RaceStateTracker _stateTracker;
+    private MPRaceStateTracker _stateTracker;
     private Car _car;
     private MPCarInput _input;
     private PhotonView view;
@@ -18,7 +18,7 @@ public class MPCarRespawner : MonoBehaviour
         view = GetComponent<PhotonView>();
         _car = GetComponent<Car>();
         _input = GetComponent<MPCarInput>();
-        _stateTracker = FindObjectOfType<RaceStateTracker>();
+        _stateTracker = FindObjectOfType<MPRaceStateTracker>();
     }
 
     private void OnEnable()
@@ -51,7 +51,7 @@ public class MPCarRespawner : MonoBehaviour
         if (!view.IsMine)
             return;
 
-        if (_stateTracker.State != RaceState.Race | respawnPoint == null)
+        if (_stateTracker.State != MPRaceState.Race | respawnPoint == null)
             return;
 
         _car.Respawn(respawnPoint.transform.position + respawnPoint.transform.up * respawnHeight,

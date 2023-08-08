@@ -8,13 +8,11 @@ public class PlayerComponentManager : MonoBehaviour
     private PhotonView view;
     private MPCarInput input;
     private CinemachineFreeLook _camera;
-    private CarChassis chassis;
 
     private void Awake()
     {
         view = GetComponent<PhotonView>();
         car = GetComponent<Car>();
-        chassis = GetComponent<CarChassis>();
         _camera = GetComponentInChildren<CinemachineFreeLook>();
         input = GetComponent<MPCarInput>();
     }
@@ -24,7 +22,6 @@ public class PlayerComponentManager : MonoBehaviour
         if (!view.IsMine)
         {
             car.enabled = false;
-            chassis.enabled = false;
             _camera.enabled = false;
             input.enabled = false;
         }

@@ -5,11 +5,11 @@ public class MPUICountdownTimer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI text;
 
-    private RaceStateTracker raceStateTracker;
+    private MPRaceStateTracker raceStateTracker;
 
     private void Awake()
     {
-        raceStateTracker = FindObjectOfType<RaceStateTracker>();
+        raceStateTracker = FindObjectOfType<MPRaceStateTracker>();
     }
 
     private void OnEnable()

@@ -1,26 +1,43 @@
 using UnityEngine;
 using Photon.Pun;
 using System.IO;
+using Photon.Realtime;
+using System.Collections.Generic;
 
 [DisallowMultipleComponent]
 public class PlayerManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private float minX, minY, maxX, maxY;
-
     private const string PHOTON_PREFABS_FOLDER = "PhotonPrefabs", PLAYER_CONTROLLER_PREFAB_NAME = "Player Car",
         PLAYER_GUI_NAME = "PlayerRaceGUI";
 
+    private const string SPAWN_POINTS_PARENT_NAME = "SpawnPoint";
+
     private PhotonView _photonView;
+
+    private Transform startPoint;
+    private List<Transform> spawnPoints;
+
+    private int countOfPlayers;
 
     private void Awake()
     {
+        spawnPoints = new List<Transform>();
+
         _photonView = GetComponent<PhotonView>();
+
+        startPoint = GameObject.Find(SPAWN_POINTS_PARENT_NAME).transform;
+
+        foreach (Transform t in startPoint)
+        {
+            spawnPoints.Add(t);
+        }
     }
 
     private void Start()
     {
         if (_photonView.IsMine)
         {
+            countOfPlayers = PhotonNetwork.CurrentRoom.PlayerCount;
             CreatePlayerController();
         }
     }
@@ -33,9 +50,18 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         byte group = 0;
         object[] data = new object[] { _photonView.ViewID };
 
-        Vector2 randomSpawnPos = new Vector2(Random.Range(minX, minY), Random.Range(maxX, maxY));
-
-        GameObject controller = PhotonNetwork.Instantiate(prefabName, randomSpawnPos, Quaternion.identity, group, data);
+        GameObject controller = PhotonNetwork.Instantiate(prefabName, spawnPoints[countOfPlayers].position,
+            spawnPoints[countOfPlayers].rotation, group, data);
         GameObject GUI = PhotonNetwork.Instantiate(GUIName, Vector3.zero, Quaternion.identity, group, data);
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        countOfPlayers++;
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        countOfPlayers--;
     }
 }
