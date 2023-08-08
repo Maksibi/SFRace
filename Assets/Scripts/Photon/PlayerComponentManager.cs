@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Photon.Pun;
 using Cinemachine;
+using Photon.Pun;
+using UnityEngine;
 
 public class PlayerComponentManager : MonoBehaviour
 {

@@ -27,6 +27,7 @@ public class RaceResultTime : MonoBehaviour
         this.timeTracker = timeTracker;
         this.stateTracker = stateTracker;
     }
+
     private void OnEnable()
     {
         stateTracker.Completed += OnRaceFinished;
