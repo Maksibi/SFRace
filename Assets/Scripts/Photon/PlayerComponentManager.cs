@@ -2,6 +2,7 @@ using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class PlayerComponentManager : MonoBehaviour
 {
     private Car car;

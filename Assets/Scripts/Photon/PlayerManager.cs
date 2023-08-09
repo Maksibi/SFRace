@@ -50,8 +50,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks
         byte group = 0;
         object[] data = new object[] { _photonView.ViewID };
 
-        GameObject controller = PhotonNetwork.Instantiate(prefabName, spawnPoints[countOfPlayers-1].position,
-            spawnPoints[countOfPlayers-1].rotation, group, data);
+        GameObject controller = PhotonNetwork.Instantiate(prefabName, spawnPoints[countOfPlayers - 1].position,
+            spawnPoints[countOfPlayers - 1].rotation, group, data);
         GameObject GUI = PhotonNetwork.Instantiate(GUIName, Vector3.zero, Quaternion.identity, group, data);
     }
 
@@ -64,5 +64,16 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     {
         countOfPlayers--;
         Destroy(gameObject);
+
+        if (otherPlayer.IsMasterClient)
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            PhotonNetwork.CurrentRoom.IsVisible = false;
+
+            foreach (Player player in PhotonNetwork.PlayerList)
+                PhotonNetwork.CloseConnection(player);
+
+            PhotonNetwork.LeaveRoom();
+        }
     }
 }

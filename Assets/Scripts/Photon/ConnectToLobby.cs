@@ -1,5 +1,4 @@
 using Photon.Pun;
-using Photon.Pun.Demo.Cockpit;
 using Photon.Realtime;
 using System.IO;
 using TMPro;
@@ -8,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class ConnectToLobby : MonoBehaviourPunCallbacks
 {
+    public static ConnectToLobby instance;
+
     private const string PHOTON_PREFABS_FOLDER = "PhotonPrefabs", PLAYER_MANAGER_PREFAB_NAME = "Player Manager";
 
     [SerializeField] private TMP_InputField createInput;
@@ -15,6 +16,11 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
+        if (instance != null)
+            Destroy(instance.gameObject);
+        else
+            instance = this;
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -57,12 +63,18 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel("Multiplayer");
     }
 
+    public override void OnLeftRoom()
+    {
+        //    Destroy(gameObject);
+    }
+
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         GameObject playerObject = FindPlayerObjectByPlayerId(otherPlayer.ActorNumber);
         if (playerObject != null)
         {
             PhotonNetwork.Destroy(playerObject);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 
