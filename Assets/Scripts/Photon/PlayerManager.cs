@@ -63,5 +63,6 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         countOfPlayers--;
+        Destroy(gameObject);
     }
 }

@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Pun.Demo.Cockpit;
 using Photon.Realtime;
 using System.IO;
 using TMPro;
@@ -54,5 +55,28 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel("Multiplayer");
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        GameObject playerObject = FindPlayerObjectByPlayerId(otherPlayer.ActorNumber);
+        if (playerObject != null)
+        {
+            PhotonNetwork.Destroy(playerObject);
+        }
+    }
+
+    private GameObject FindPlayerObjectByPlayerId(int playerId)
+    {
+        GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (GameObject playerObject in playerObjects)
+        {
+            PhotonView photonView = playerObject.GetComponent<PhotonView>();
+
+            if (photonView.Owner.ActorNumber == playerId)
+                return playerObject;
+        }
+        return null;
     }
 }

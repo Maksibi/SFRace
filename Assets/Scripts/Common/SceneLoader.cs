@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class SceneLoader : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        if(PhotonNetwork.InRoom)
+            PhotonNetwork.LeaveRoom();
+
         SceneManager.LoadScene(MainMenuSceneName);
     }
 
@@ -14,6 +18,4 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
-
 }
