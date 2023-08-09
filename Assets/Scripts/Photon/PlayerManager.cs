@@ -59,7 +59,7 @@ public class PlayerManager : MonoBehaviourPunCallbacks
     {
         countOfPlayers++;
     }
-
+    
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         countOfPlayers--;

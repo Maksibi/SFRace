@@ -1,51 +1,12 @@
 using Photon.Pun;
 using Photon.Realtime;
-using System.IO;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ConnectToLobby : MonoBehaviourPunCallbacks
 {
-    public static ConnectToLobby instance;
-
-    private const string PHOTON_PREFABS_FOLDER = "PhotonPrefabs", PLAYER_MANAGER_PREFAB_NAME = "Player Manager";
-
     [SerializeField] private TMP_InputField createInput;
     [SerializeField] private TMP_InputField joinInput;
-
-    private void Awake()
-    {
-        if (instance != null)
-            Destroy(instance.gameObject);
-        else
-            instance = this;
-
-        DontDestroyOnLoad(gameObject);
-    }
-
-    public override void OnEnable()
-    {
-        base.OnEnable();
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    public override void OnDisable()
-    {
-        base.OnDisable();
-
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
-    {
-        if (scene.buildIndex == 2)
-        {
-            Debug.Log(scene.name + "Loaded");
-            PhotonNetwork.Instantiate(Path.Combine(PHOTON_PREFABS_FOLDER, PLAYER_MANAGER_PREFAB_NAME), Vector3.zero, Quaternion.identity);
-        }
-    }
 
     public void CreateRoom()
     {
@@ -61,34 +22,5 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel("Multiplayer");
-    }
-
-    public override void OnLeftRoom()
-    {
-        //    Destroy(gameObject);
-    }
-
-    public override void OnPlayerLeftRoom(Player otherPlayer)
-    {
-        GameObject playerObject = FindPlayerObjectByPlayerId(otherPlayer.ActorNumber);
-        if (playerObject != null)
-        {
-            PhotonNetwork.Destroy(playerObject);
-            PhotonNetwork.Destroy(gameObject);
-        }
-    }
-
-    private GameObject FindPlayerObjectByPlayerId(int playerId)
-    {
-        GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
-
-        foreach (GameObject playerObject in playerObjects)
-        {
-            PhotonView photonView = playerObject.GetComponent<PhotonView>();
-
-            if (photonView.Owner.ActorNumber == playerId)
-                return playerObject;
-        }
-        return null;
     }
 }

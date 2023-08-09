@@ -1,5 +1,6 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ConnectToServer : MonoBehaviourPunCallbacks
 {
@@ -8,8 +9,10 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
     }
 
-    private void OnConnectedToServer()
+    public override void OnConnectedToMaster()
     {
         Debug.Log("Connected to server");
+
+        SceneManager.LoadScene(1);
     }
 }

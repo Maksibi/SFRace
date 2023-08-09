@@ -8,7 +8,7 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        if(PhotonNetwork.InRoom)
+        if (PhotonNetwork.InRoom)
             PhotonNetwork.LeaveRoom();
 
         SceneManager.LoadScene(MainMenuSceneName);

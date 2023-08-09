@@ -1547,6 +1547,7 @@ GameObject:
   - component: {fileID: 5406086378074534066}
   - component: {fileID: 515972811}
   - component: {fileID: 515972810}
+  - component: {fileID: 8063695753771345473}
   m_Layer: 0
   m_Name: Main Menu GUI
   m_TagString: Untagged
@@ -1681,6 +1682,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickSound: {fileID: 8300000, guid: 44a5d716536c11248a09ee1a54d5d168, type: 3}
   selectSound: {fileID: 8300000, guid: 5aa948679296f2649802b2f562804537, type: 3}
+--- !u!114 &8063695753771345473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406086378074534065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 737a70f2fd023ab4393b00e374fd19e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  createInput: {fileID: 1465129193867274673}
+  joinInput: {fileID: 6788127242205519994}
 --- !u!1 &5406086378101948798
 GameObject:
   m_ObjectHideFlags: 0
@@ -4306,7 +4321,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4562253384377645520, guid: 968b56e90fc284d458d8dd26973f1847, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4562253384377645520, guid: 968b56e90fc284d458d8dd26973f1847, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -4323,7 +4338,7 @@ PrefabInstance:
     - target: {fileID: 4562253384377645520, guid: 968b56e90fc284d458d8dd26973f1847, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1815369068562075038}
+      objectReference: {fileID: 8063695753771345473}
     - target: {fileID: 4562253384377645520, guid: 968b56e90fc284d458d8dd26973f1847, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -4354,7 +4369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4562253384377645520, guid: 968b56e90fc284d458d8dd26973f1847, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: JoinRoom
       objectReference: {fileID: 0}
     - target: {fileID: 4562253384377645520, guid: 968b56e90fc284d458d8dd26973f1847, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -4370,7 +4385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4562253384377645520, guid: 968b56e90fc284d458d8dd26973f1847, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: ConnectToLobby, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4562253384377645520, guid: 968b56e90fc284d458d8dd26973f1847, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -4800,7 +4815,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4562253384377645520, guid: 968b56e90fc284d458d8dd26973f1847, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4562253384377645520, guid: 968b56e90fc284d458d8dd26973f1847, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -4817,7 +4832,7 @@ PrefabInstance:
     - target: {fileID: 4562253384377645520, guid: 968b56e90fc284d458d8dd26973f1847, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 741797904264517262}
+      objectReference: {fileID: 8063695753771345473}
     - target: {fileID: 4562253384377645520, guid: 968b56e90fc284d458d8dd26973f1847, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -4848,7 +4863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4562253384377645520, guid: 968b56e90fc284d458d8dd26973f1847, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: CreateRoom
       objectReference: {fileID: 0}
     - target: {fileID: 4562253384377645520, guid: 968b56e90fc284d458d8dd26973f1847, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -4864,7 +4879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4562253384377645520, guid: 968b56e90fc284d458d8dd26973f1847, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: ConnectToLobby, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4562253384377645520, guid: 968b56e90fc284d458d8dd26973f1847, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
